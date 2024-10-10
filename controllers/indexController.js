@@ -26,4 +26,12 @@ module.exports = {
     });
     res.redirect("/");
   },
+  showMessage: (req, res) => {
+    const messageId = parseInt(req.params.id, 10);
+    // Check if messageId is out of bounds
+    if (isNaN(messageId) || messageId < 0 || messageId >= messages.length) {
+      return res.status(404).send("Message not found");
+    }
+    res.render("message", { id: messageId, message: messages[messageId] });
+  },
 };

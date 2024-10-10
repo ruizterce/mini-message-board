@@ -8,7 +8,7 @@
   <body>
     <div class="message-board">
       <h1><%= title %></h1>
-      <% messages.map((msg)=>{ %>
+      <% messages.map((msg, index)=>{ %>
       <div class="message">
         <div class="author"><%=msg.user%></div>
         <div class="date">
@@ -17,9 +17,10 @@
           'numeric', hour12: false})%>
         </div>
         <div class="content"><%= msg.text %></div>
+        <a href="/message/<%= index %>">Details</a>
       </div>
       <% })%>
-      <a href="./new">New Message</a>
+      <a href="/new">New Message</a>
     </div>
   </body>
 </html>
