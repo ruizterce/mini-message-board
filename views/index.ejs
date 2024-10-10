@@ -1,15 +1,25 @@
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Message Board</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
   <body>
-    <%= title %> <% messages.map((msg)=>{ %>
-    <li>
-      <span>
-        <%=msg.user%> - <%=msg.added.toLocaleString('en-US', { month: 'short',
-        day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric',
-        second: 'numeric', hour12: false})%>
-      </span>
-      <p><%= msg.text %></p>
-    </li>
-    <% })%>
-    <a href="./new">New Message</a>
+    <h1><%= title %></h1>
+    <div class="message-board">
+      <% messages.map((msg)=>{ %>
+      <div class="message">
+        <div class="author"><%=msg.user%></div>
+        <div class="date">
+          <%=msg.added.toLocaleString('en-US', { month: 'short', day: 'numeric',
+          year: 'numeric', hour: 'numeric', minute: 'numeric', second:
+          'numeric', hour12: false})%>
+        </div>
+        <div class="content"><%= msg.text %></div>
+      </div>
+      <% })%>
+      <a href="./new">New Message</a>
+    </div>
   </body>
 </html>
