@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
     <div class="message-board">
+      <h1><%= title %></h1>
       <% messages.map((msg)=>{ %>
       <div class="message">
         <div class="author"><%=msg.user%></div>
