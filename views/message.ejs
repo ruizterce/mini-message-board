@@ -3,12 +3,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini Message Board</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="/message.css" />
   </head>
   <body>
-    <div>Message id: <%= id %></div>
-    <div>Post date: <%= message.added %></div>
-    <div>Author: <%= message.user %></div>
-    <div>Text: <%= message.text %></div>
+    <div class="message-container">
+      <div class="message-id">Message id: <%= id %></div>
+      <div class="message-content">
+        <h4>Date</h4>
+        <div class="date"><%= message.added %></div>
+        <h4>Author</h4>
+        <div class="author"><%= message.user %></div>
+        <h4>Text</h4>
+        <div class="text">Text: <%= message.text %></div>
+      </div>
+    </div>
+    <a href="/"><button>Back</button></a>
   </body>
 </html>
