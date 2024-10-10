@@ -1,5 +1,14 @@
 <html>
   <body>
-    Hello World!
+    <%= title %> <% messages.map((msg)=>{ %>
+    <li>
+      <span>
+        <%=msg.user%> - <%=msg.added.toLocaleString('en-US', { month: 'short',
+        day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric',
+        second: 'numeric', hour12: false})%>
+      </span>
+      <p><%= msg.text %></p>
+    </li>
+    <% })%>
   </body>
 </html>
