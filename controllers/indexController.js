@@ -33,6 +33,10 @@ module.exports = {
   showMessage: async (req, res) => {
     try {
       const messageId = parseInt(req.params.id, 10);
+      if (isNaN(messageId)) {
+        return res.status(400).send("Invalid message ID");
+      }
+
       const message = await db.getMessageById(messageId);
 
       if (!message) {
