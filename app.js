@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
-const PORT = 3000;
+const PORT = 8080;
 const indexRouter = require("./routes/indexRouter");
 const assetsPath = path.join(__dirname, "public");
 

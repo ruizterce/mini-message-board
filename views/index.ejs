@@ -8,16 +8,16 @@
   <body>
     <div class="message-board">
       <h1><%= title %></h1>
-      <% messages.map((msg, index)=>{ %>
+      <% messages.map((msg)=>{ %>
       <div class="message">
-        <div class="author"><%=msg.user%></div>
+        <div class="author"><%=msg.username%></div>
         <div class="date">
           <%=msg.added.toLocaleString('en-US', { month: 'short', day: 'numeric',
           year: 'numeric', hour: 'numeric', minute: 'numeric', second:
           'numeric', hour12: false})%>
         </div>
         <div class="content"><%= msg.text %></div>
-        <a href="/message/<%= index %>" class="details-btn">Details</a>
+        <a href="/message/<%= msg.id %>" class="details-btn">Details</a>
       </div>
       <% })%>
       <a href="/new" class="new-msg-btn">New Message</a>

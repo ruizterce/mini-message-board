@@ -1,37 +1,48 @@
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const db = require("../db/queries");
 
 module.exports = {
-  get: (req, res) => {
-    res.render("index", { title: "Mini Messageboard", messages: messages });
+  get: async function (req, res) {
+    try {
+      const messages = await db.getAllMessages();
+      res.render("index", { title: "Mini Messageboard", messages: messages });
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      res.status(500).send("Internal Server Error");
+    }
   },
+
   getMessageForm: (req, res) => {
     res.render("form");
   },
-  sendMessage: (req, res) => {
-    messages.push({
+
+  sendMessage: async function (req, res) {
+    const newMessage = {
       text: req.body.message,
-      user: req.body.author,
+      username: req.body.author,
       added: new Date(),
-    });
-    res.redirect("/");
-  },
-  showMessage: (req, res) => {
-    const messageId = parseInt(req.params.id, 10);
-    // Check if messageId is out of bounds
-    if (isNaN(messageId) || messageId < 0 || messageId >= messages.length) {
-      return res.status(404).send("Message not found");
+    };
+    try {
+      await db.saveMessage(newMessage);
+      res.redirect("/");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      res.status(500).send("Internal Server Error");
     }
-    res.render("message", { id: messageId, message: messages[messageId] });
+  },
+
+  showMessage: async (req, res) => {
+    try {
+      const messageId = parseInt(req.params.id, 10);
+      const message = await db.getMessageById(messageId);
+
+      if (!message) {
+        return res.status(404).send("Message not found");
+      }
+
+      res.render("message", { id: messageId, message });
+    } catch (error) {
+      console.error("Error fetching message:", error);
+      res.status(500).send("Internal Server Error");
+    }
   },
 };
